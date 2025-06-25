@@ -26,8 +26,8 @@
     - name: Template HTCondor configuration.
       become: true
       ansible.builtin.template:
-        src: htcondor/condor_config.local.j2
-        dest: /etc/condor/condor_config.local
+        src: 99-cloud-init.conf.j2
+        dest: /etc/condor/config.d/99-cloud-init.conf
         owner: root
         group: root
         mode: "0644"
@@ -48,4 +48,3 @@
   roles:
     - grycap.htcondor
     - usegalaxy-eu.autofs
-
