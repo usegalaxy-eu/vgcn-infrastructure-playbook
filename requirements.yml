@@ -1,0 +1,7 @@
+roles:
+  - name: grycap.htcondor
+    src: https://github.com/usegalaxy-eu/ansible-htcondor-grycap
+    version: d9a4aab0052dfb31d48c986d39a7f5e3692abba4
+  - name: usegalaxy-eu.autofs
+    src: https://github.com/usegalaxy-eu/ansible-autofs
+    version: 1.3.0
