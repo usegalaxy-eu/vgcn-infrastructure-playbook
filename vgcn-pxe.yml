@@ -1,5 +1,6 @@
 - name: VGCN PXE Configuration Playbook
   hosts: all
+  become: true
   vars_files:
     - mounts/dest/all.yml
     - mounts/mountpoints.yml
