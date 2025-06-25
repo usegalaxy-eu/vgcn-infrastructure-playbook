@@ -1,4 +1,4 @@
-- name: VGCN PXE Configuration Playbook
+- name: VGCN Configuration Playbook
   hosts: all
   become: true
   vars_files:
