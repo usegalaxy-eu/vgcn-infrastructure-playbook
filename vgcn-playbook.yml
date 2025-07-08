@@ -50,7 +50,14 @@
         owner: telegraf
         group: telegraf
       no_log: true
+<<<<<<< Updated upstream
       notify: Restart Telegraf
+=======
+<<<<<<< Updated upstream
+=======
+      notify: Reload Telegraf
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
   roles:
     - grycap.htcondor
