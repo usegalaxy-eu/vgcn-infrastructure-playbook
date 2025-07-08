@@ -1,0 +1,2 @@
+htcondor_features: GPUs
+gpu_discovery_extra: "-extra"
