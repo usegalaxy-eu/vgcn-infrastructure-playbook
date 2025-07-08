@@ -53,5 +53,6 @@
       notify: Reload Telegraf
 
   roles:
+    - usegalaxy_eu.firewall
     - grycap.htcondor
     - usegalaxy-eu.autofs
