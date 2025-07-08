@@ -1,4 +1,4 @@
 [divgpu]
-tstgpu.bi.privat
+c128m512g4-n37104.bi.privat
 [test]
-tstimg.bi.privat
+c32m512-n37103.bi.privat
