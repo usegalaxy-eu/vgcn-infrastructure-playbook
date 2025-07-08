@@ -2,5 +2,5 @@
 c128m512g4-n37104.bi.privat
 [entiregpu]
 c128m512g4-n37103.bi.privat
-[test]
+[compute]
 tstimg.bi.privat
