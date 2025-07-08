@@ -1,5 +1,3 @@
-htcondor_features: GPUs
-gpu_discovery_extra: "-extra"
 galaxy_group: compute
 galaxy_cluster: denbi
 galaxy_docker_hack: "true"
