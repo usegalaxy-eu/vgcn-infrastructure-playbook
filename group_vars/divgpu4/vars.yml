@@ -1,4 +1,4 @@
 gpu_division: 4
 htcondor_features: GPUs
 gpu_discovery_extra: "-extra"
-galaxy_group: training-pxe-test-gpu
+galaxy_group: pxe-gpu-div4
