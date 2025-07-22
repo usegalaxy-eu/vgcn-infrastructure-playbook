@@ -42,6 +42,12 @@
         mode: "0644"
       notify: Reload HTCondor
   tasks:
+    - name: Update Telegraf hostname
+      ansible.builtin.lineinfile:
+        path: /etc/telegraf/telegraf.conf
+        search_string: '    hostname = "localhost.localdomain"'
+        line: '    hostname = "{{ ansible_fqdn }}"'
+      notify: Reload Telegraf
     - name: Copy Telegraf credentials
       ansible.builtin.template:
         src: output.conf.j2
