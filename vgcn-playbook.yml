@@ -57,6 +57,14 @@
         group: telegraf
       no_log: true
       notify: Reload Telegraf
+    - name: Deploy SLX disk monitor script
+      ansible.builtin.template:
+        src: check_slx_disks.sh
+        dest: /usr/bin/check_slx_disks
+        owner: root
+        group: root
+        mode: 0755
+      notify: Reload Telegraf
 
   roles:
     - usegalaxy_eu.firewall
