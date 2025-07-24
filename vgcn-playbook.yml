@@ -58,7 +58,7 @@
       no_log: true
       notify: Reload Telegraf
     - name: Deploy SLX disk monitor script
-      ansible.builtin.template:
+      ansible.builtin.copy:
         src: check_slx_disks.sh
         dest: /usr/bin/check_slx_disks
         owner: root
