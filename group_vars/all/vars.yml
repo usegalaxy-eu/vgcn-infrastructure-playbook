@@ -26,5 +26,5 @@ check_slx_disks_telegraf:
       - commands = ["/usr/bin/check_slx_disks"]
       - timeout = "2m"
       - data_format = "influx"
-      - interval = "5m"
+      - interval = "1m"
 telegraf_plugins_extra: "{{ telegraf_plugins_extra | combine(check_slx_disks) }}"
