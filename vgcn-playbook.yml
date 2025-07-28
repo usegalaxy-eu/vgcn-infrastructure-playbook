@@ -82,7 +82,6 @@
       become: true
       notify:
         - Restart Telegraf
-
   roles:
     - usegalaxy_eu.firewall
     - grycap.htcondor
