@@ -7,14 +7,14 @@
   vars:
     internal: true
   handlers:
-    - name: Reload Telegraf
+    - name: Restart Telegraf
       ansible.builtin.service:
         name: telegraf
-        state: reloaded
-    - name: Reload HTCondor
+        state: restarted
+    - name: Restart HTCondor
       ansible.builtin.service:
         name: condor
-        state: reloaded
+        state: restarted
   pre_tasks:
     - name: Ensure the HTCondor configuration directory exists.
       become: true
@@ -32,7 +32,7 @@
         owner: root
         group: root
         mode: "0644"
-      notify: Reload HTCondor
+      notify: Restart HTCondor
     - name: Template HTCondor host specific configuration.
       ansible.builtin.template:
         src: 99-cloud-init.conf.j2
@@ -40,14 +40,14 @@
         owner: root
         group: root
         mode: "0644"
-      notify: Reload HTCondor
+      notify: Restart HTCondor
   tasks:
     - name: Update Telegraf hostname
       ansible.builtin.lineinfile:
         path: /etc/telegraf/telegraf.conf
         search_string: '    hostname = "localhost.localdomain"'
         line: '    hostname = "{{ ansible_fqdn }}"'
-      notify: Reload Telegraf
+      notify: Restart Telegraf
     - name: Copy Telegraf credentials
       ansible.builtin.template:
         src: output.conf.j2
@@ -56,8 +56,7 @@
         owner: telegraf
         group: telegraf
       no_log: true
-      notify: Reload Telegraf
-
+      notify: Restart Telegraf
   roles:
     - usegalaxy_eu.firewall
     - grycap.htcondor
