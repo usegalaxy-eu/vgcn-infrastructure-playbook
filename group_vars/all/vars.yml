@@ -16,3 +16,15 @@ rank: GalaxyGroup
 base_cgroup: htcondor
 memory_limit_policy: hard
 reserved_memory: 2048
+
+
+## Telegraf
+telegraf_agent_config_path: /etc/telegraf
+telegraf_plugins_extra:
+  check_slx_disks_telegraf:
+    plugin: exec
+    config:
+      - commands = ["/usr/bin/check_slx_disks"]
+      - timeout = "2m"
+      - data_format = "influx"
+      - interval = "1m"

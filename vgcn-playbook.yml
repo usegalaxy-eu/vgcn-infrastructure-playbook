@@ -44,19 +44,44 @@
   tasks:
     - name: Update Telegraf hostname
       ansible.builtin.lineinfile:
-        path: /etc/telegraf/telegraf.conf
+        path: "{{ telegraf_agent_config_path }}/telegraf.conf"
         search_string: '    hostname = "localhost.localdomain"'
         line: '    hostname = "{{ ansible_fqdn }}"'
       notify: Restart Telegraf
     - name: Copy Telegraf credentials
       ansible.builtin.template:
         src: output.conf.j2
-        dest: /etc/telegraf/telegraf.d/output.conf
+        dest: "{{ telegraf_agent_config_path }}/telegraf.d/output.conf"
         mode: "0640"
         owner: telegraf
         group: telegraf
       no_log: true
       notify: Restart Telegraf
+    - name: Deploy SLX disk monitor script
+      ansible.builtin.copy:
+        src: check_slx_disks.sh
+        dest: /usr/bin/check_slx_disks
+        owner: root
+        group: root
+        mode: 0755
+      notify: Restart Telegraf
+    - name: "Copy telegraf extra plugins"
+      template:
+        src: "telegraf-extra-plugin.conf.j2"
+        dest: "{{ telegraf_agent_config_path }}/telegraf.d/{{ item.key }}.conf"
+        owner: telegraf
+        group: telegraf
+        mode: 0640
+      with_dict: "{{ telegraf_plugins_extra }}"
+      loop_control:
+        label: "{{ item.key }}"
+      when:
+        - telegraf_plugins_extra is defined
+        - telegraf_plugins_extra is iterable
+        - item.value.state|default('present') != 'absent'
+      become: true
+      notify:
+        - Restart Telegraf
   roles:
     - usegalaxy_eu.firewall
     - grycap.htcondor
