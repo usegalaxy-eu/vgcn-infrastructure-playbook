@@ -2,6 +2,7 @@
 c128m512g4-n37104.bi.privat
 [entiregpu]
 c128m512g4-n37103.bi.privat
+c64m400g8-n3801.bi.privat
 [compute]
 tstimg.bi.privat
 c32m2048-n3681.bi.privat
