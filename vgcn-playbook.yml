@@ -63,7 +63,7 @@
         msg: >
           Disks are misconfigured:
           "{{ disk_setup.stdout }}"
-      when: '"0" in disk_setup.stdout or disk_setup.stderr | length > 0'
+      when: '"0" in disk_setup.stdout or (disk_setup.stderr | length > 0)'
     - name: Ensure the HTCondor configuration directory exists.
       ansible.builtin.file:
         path: /etc/condor
