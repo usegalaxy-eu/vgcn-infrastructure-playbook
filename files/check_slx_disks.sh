@@ -20,7 +20,7 @@ fi
 # Check that scratch is mounted
 scratch=0
 SCRATCH_MOUNT=/scratch
-if [ "$disk_setup" ] && grep -qs "$SCRATCH_MOUNT" /proc/mounts; then
+if [ "$disk_setup" ] && df | grep -qs "$SCRATCH_MOUNT"; then
     scratch=1
 fi
 
