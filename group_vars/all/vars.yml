@@ -19,12 +19,13 @@ reserved_memory: 2048
 
 
 ## Telegraf
+check_slx_disks_path: /usr/local/bin/check_slx_disks
 telegraf_agent_config_path: /etc/telegraf
 telegraf_plugins_extra:
   check_slx_disks_telegraf:
     plugin: exec
     config:
-      - commands = ["/usr/bin/check_slx_disks"]
+      - commands = ["{{ check_slx_disks_path }}"]
       - timeout = "2m"
       - data_format = "influx"
       - interval = "1m"
