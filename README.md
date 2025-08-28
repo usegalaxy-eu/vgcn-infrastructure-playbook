@@ -1,3 +1,4 @@
+<a href='https://build.galaxyproject.eu/job/usegalaxy-eu/job/VGCN-Infrastructure-Playbook/'><img src='https://build.galaxyproject.eu/buildStatus/icon?job=usegalaxy-eu%2FVGCN-Infrastructure-Playbook'></a>
 # VGCN Infrastructure Playbook
 ## What this does
 - Install and configure HTCondor, based on group based variables
