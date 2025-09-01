@@ -14,6 +14,16 @@
         iprange: "{{ isolated_ip_range }}"
     state: present
 
+- name: Block access to internal networks from isolated network
+  ansible.builtin.iptables:
+    chain: "{{ iptables_chain }}"
+    chain_management: true
+    source: "{{ isolated_subnet }}"
+    destination: "{{ item }}"
+    jump: DROP
+    comment: "Block access to internal network {{ item }}"
+  loop: "{{ internal_networks }}"
+
 - name: Insert jump to custom chain in DOCKER-USER
   ansible.builtin.iptables:
     chain_management: true
@@ -22,15 +32,6 @@
     action: insert
     rule_num: 1
     comment: "Jump to custom Docker user isolation rules"
-
-- name: Block access to internal networks from isolated network
-  ansible.builtin.iptables:
-    chain: "{{ iptables_chain }}"
-    source: "{{ isolated_subnet }}"
-    destination: "{{ item }}"
-    jump: DROP
-    comment: "Block access to internal network {{ item }}"
-  loop: "{{ internal_networks }}"
 
 - name: Allow established and related connections
   ansible.builtin.iptables:
