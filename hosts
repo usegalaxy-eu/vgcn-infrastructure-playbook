@@ -6,13 +6,16 @@ c128m512g4-n37104.bi.privat
 c128m512g4-n37103.bi.privat
 # Nvidia T4
 c64m384g8-n3801.bi.privat
+# training embo-assembly-2025
+# Revert PR after Sep 12
+[training_embo_assembly_2025]
+c192m1536-n3701.bi.privat
+c192m1536-n3702.bi.privat
 [compute]
 tstimg.bi.privat
 # Intel Broadwell
 c32m2048-n3681.bi.privat
 # AMD Genoa
-c192m1536-n3701.bi.privat
-c192m1536-n3702.bi.privat
 c192m1536-n3703.bi.privat
 c192m1536-n3704.bi.privat
 c192m1536-n3705.bi.privat
