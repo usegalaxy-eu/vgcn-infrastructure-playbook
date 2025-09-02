@@ -6,7 +6,7 @@ firewall_restart_daemon: true
 
 galaxy_group: training-pxe-test
 galaxy_cluster: denbi
-galaxy_docker_hack: "true"
+galaxy_docker_hack: true
 startd_attrs:
   - GalaxyTraining
   - GalaxyGroup

@@ -2,6 +2,10 @@ collections:
   - name: ansible.posix
     version: 1.5.1
     source: https://galaxy.ansible.com
+  - name: community.docker
+    version: 3.12.1
+    source: https://galaxy.ansible.com
+    type: galaxy
 roles:
   - name: grycap.htcondor
     src: https://github.com/usegalaxy-eu/ansible-htcondor-grycap

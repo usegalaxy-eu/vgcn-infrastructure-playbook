@@ -1,0 +1,47 @@
+---
+- name: Ensure Docker is installed and running
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Create isolated Docker network
+  community.docker.docker_network:
+    name: "{{ isolated_network_name }}"
+    driver: bridge
+    ipam_config:
+      - subnet: "{{ isolated_subnet }}"
+        iprange: "{{ isolated_ip_range }}"
+    state: present
+
+- name: Block access to internal networks from isolated network
+  ansible.builtin.iptables:
+    chain: "{{ iptables_chain }}"
+    chain_management: true
+    source: "{{ isolated_subnet }}"
+    destination: "{{ item }}"
+    jump: DROP
+    comment: "Block access to internal network {{ item }}"
+  loop: "{{ internal_networks }}"
+
+- name: Insert jump to custom chain in DOCKER-USER
+  ansible.builtin.iptables:
+    chain_management: true
+    chain: DOCKER-USER
+    jump: "{{ iptables_chain }}"
+    action: insert
+    rule_num: 1
+    comment: "Jump to custom Docker user isolation rules"
+
+- name: Allow established and related connections
+  ansible.builtin.iptables:
+    chain: "{{ iptables_chain }}"
+    ctstate: RELATED,ESTABLISHED
+    jump: ACCEPT
+    comment: "Allow established and related connections"
+
+- name: Return from custom chain (default action)
+  ansible.builtin.iptables:
+    chain: "{{ iptables_chain }}"
+    jump: RETURN
+    comment: "Return to DOCKER-USER chain"
