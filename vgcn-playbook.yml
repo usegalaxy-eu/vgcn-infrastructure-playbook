@@ -11,10 +11,10 @@
       ansible.builtin.service:
         name: telegraf
         state: restarted
-    - name: Restart HTCondor
+    - name: Reload HTCondor
       ansible.builtin.service:
         name: condor
-        state: restarted
+        state: reloaded
   pre_tasks:
     - name: Update Telegraf hostname
       ansible.builtin.lineinfile:
@@ -79,7 +79,7 @@
         owner: root
         group: root
         mode: "0644"
-      notify: Restart HTCondor
+      notify: Reload HTCondor
     - name: Template HTCondor host specific configuration.
       ansible.builtin.template:
         src: 99-cloud-init.conf.j2
@@ -87,7 +87,7 @@
         owner: root
         group: root
         mode: "0644"
-      notify: Restart HTCondor
+      notify: Reload HTCondor
   tasks:
     - name: Restrict Docker network access for ITs
       ansible.builtin.include_tasks:
