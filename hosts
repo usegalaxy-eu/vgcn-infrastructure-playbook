@@ -1,3 +1,10 @@
+# Nodes that should receive docker network restrictions should go here
+[interactive]
+c64m384g8-n3801.bi.privat
+
+[test]
+c64m384g8-n3801.bi.privat
+
 [divgpu4]
 # Nvidia L40S
 c128m512g4-n37104.bi.privat
@@ -5,7 +12,7 @@ c128m512g4-n37104.bi.privat
 # Nvidia L40S
 c128m512g4-n37103.bi.privat
 # Nvidia T4
-c64m384g8-n3801.bi.privat
+
 # training embo-assembly-2025
 # Revert PR after Sep 12
 [training_embo_assembly_2025]

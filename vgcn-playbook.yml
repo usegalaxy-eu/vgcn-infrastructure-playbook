@@ -88,6 +88,11 @@
         group: root
         mode: "0644"
       notify: Restart HTCondor
+  tasks:
+    - name: Restrict Docker network access for ITs
+      ansible.builtin.include_tasks:
+        file: tasks/restrict_docker.yml
+      when: "'interactive' in group_names"
 
   roles:
     - usegalaxy_eu.firewall
