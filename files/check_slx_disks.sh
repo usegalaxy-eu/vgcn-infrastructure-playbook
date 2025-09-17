@@ -24,5 +24,5 @@ SCRATCH_MOUNT=/scratch
 if [ "$disk_setup" ] && timeout 5 df | grep -qs "$SCRATCH_MOUNT"; then
             scratch=1
 fi
-timeout 5 df && nfs=2 || nfs=0
+timeout 5 df >> /dev/null && nfs=2 || nfs=0
 echo "pxe.disk_mode,host=$(cat /etc/hostname) openslx_label=$openslx_label,scratch_mounted=$scratch,disksetup_ok=$disk_setup,nfs=$nfs"
