@@ -10,6 +10,6 @@ internal_networks:
   - 132.230.153.0/25
   - 10.15.7.0/24
 accepted_internal_ips:
-  - 10.15.7.254 # gateway
+  - 10.4.68.254 # gateway
   - 10.4.68.201 # sn09
 iptables_chain: "DOCKER-ISOLATION"
