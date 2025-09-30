@@ -14,6 +14,16 @@
         iprange: "{{ isolated_ip_range }}"
     state: present
 
+- name: Allow access to internal network gateways from isolated network
+  ansible.builtin.iptables:
+    chain: "{{ iptables_chain }}"
+    chain_management: true
+    source: "{{ isolated_subnet }}"
+    destination: "{{ item }}"
+    jump: ACCEPT
+    comment: "Allow access to internal network gateway {{ item }}"
+  loop: "{{ accepted_internal_ips }}"
+
 - name: Block access to internal networks from isolated network
   ansible.builtin.iptables:
     chain: "{{ iptables_chain }}"
