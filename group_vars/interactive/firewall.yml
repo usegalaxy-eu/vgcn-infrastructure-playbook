@@ -1,6 +1,4 @@
-isolated_network_name: "interactive_network"
-isolated_subnet: "172.25.0.0/16"
-isolated_ip_range: "172.25.1.0/24"
+isolated_subnet: "172.17.0.0/16"
 internal_networks:
   - 10.4.68.0/24
   - 10.5.67.0/24
@@ -10,4 +8,8 @@ internal_networks:
   - 132.230.224.0/24
   - 10.5.153.0/24
   - 132.230.153.0/25
-iptables_chain: "DOCKER_USER_ISOLATION"
+  - 10.15.7.0/24
+accepted_internal_ips:
+  - 10.4.68.254 # gateway
+  - 10.4.68.201 # sn09
+iptables_chain: "DOCKER-ISOLATION"
