@@ -5,15 +5,6 @@
     state: started
     enabled: yes
 
-- name: Create isolated Docker network
-  community.docker.docker_network:
-    name: "{{ isolated_network_name }}"
-    driver: bridge
-    ipam_config:
-      - subnet: "{{ isolated_subnet }}"
-        iprange: "{{ isolated_ip_range }}"
-    state: present
-
 - name: Allow access to internal network gateways from isolated network
   ansible.builtin.iptables:
     chain: "{{ iptables_chain }}"
