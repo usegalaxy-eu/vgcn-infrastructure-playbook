@@ -9,6 +9,7 @@ internal_networks:
   - 10.5.153.0/24
   - 132.230.153.0/25
   - 10.15.7.0/24
+  - 10.8.103.38/32 # dnbd3-primary
 accepted_internal_ips:
   - 10.4.68.254 # gateway
   - 10.4.68.201 # sn09

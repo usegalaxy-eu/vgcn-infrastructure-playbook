@@ -92,7 +92,6 @@
     - name: Restrict Docker network access for ITs
       ansible.builtin.include_tasks:
         file: tasks/restrict_docker.yml
-      when: "'interactive' in group_names"
 
   roles:
     - usegalaxy_eu.firewall
