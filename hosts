@@ -1,7 +1,4 @@
 # Nodes that should receive docker network restrictions should go here
-[interactive]
-c64m384g8-n3801.bi.privat
-
 [test]
 
 [divgpu4]
