@@ -20,6 +20,10 @@ reserved_memory: 2048
 autofs_mount_points:
   - data
   - usrlocal
+  - jwd
+  - cache
+  - gxkey
+  - misc
 
 ## Telegraf
 check_slx_disks_path: /usr/local/bin/check_slx_disks
