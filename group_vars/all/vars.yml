@@ -23,6 +23,7 @@ autofs_mount_points:
   - gxkey
   - jwd
   - usrlocal
+  - usrlocal_celerycluster # which is actually /opt/galaxy
   - cache
   - misc
 
