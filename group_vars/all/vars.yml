@@ -17,6 +17,15 @@ base_cgroup: htcondor
 memory_limit_policy: hard
 reserved_memory: 2048
 
+autofs_mount_points:
+  - data
+  - gxtest
+  - gxkey
+  - jwd
+  - usrlocal
+  - cache
+  - misc
+
 ## Telegraf
 check_slx_disks_path: /usr/local/bin/check_slx_disks
 telegraf_agent_config_path: /etc/telegraf
