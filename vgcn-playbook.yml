@@ -88,12 +88,9 @@
         group: root
         mode: "0644"
       notify: Reload HTCondor
-  tasks:
-    - name: Restrict Docker network access for ITs
-      ansible.builtin.include_tasks:
-        file: tasks/restrict_docker.yml
 
   roles:
     - usegalaxy_eu.firewall
     - grycap.htcondor
     - usegalaxy-eu.autofs
+    - usegalaxy_eu.restrict_docker_net
