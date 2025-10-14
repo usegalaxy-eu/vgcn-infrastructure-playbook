@@ -1,0 +1,48 @@
+---
+- name: Check if Nvidia is correctly installed
+  ansible.builtin.command:
+    cmd: nvidia-smi
+  register: nvidia_smi
+
+- name: Install if not
+  when: nvidia_smi.rc != 0
+  block:
+    - name: Gather the package facts
+      ansible.builtin.package_facts:
+        manager: auto
+    - name: Remove old driver
+      when: ansible_facts.packages['nvidia-driver'].version != nvidia_proprietary_version
+      ansible.builtin.dnf:
+        state: absent
+        name:
+          - nvidia-driver
+    - name: Create temporary build directory
+      ansible.builtin.tempfile:
+        state: directory
+        suffix: nvidia
+      register: nvidia_tmp_dir
+    - name: Download driver package
+      ansible.builtin.get_url:
+        url: "{{ nvidia_proprietary_url }}"
+        dest: "/{{ tmp }}/{{ nvidia_proprietary_url | split('/') | last }}"
+    - name: Untar
+      ansible.builtin.unarchive:
+        src: "/{{ tmp }}/{{ nvidia_proprietary_url | split('/') | last }}"
+        dest: "/{{ nvidia_tmp_dir.path }}"
+        remote_src: true
+    - name: Run installation script
+      ansible.builtin.script:
+        cmd: "/{{ nvidia_tmp_dir.path }}/NVIDIA-Linux-x86_64-{{ nvidia_proprietary_version }}.run -s"
+    - name: Check if nvidia-smi is successful
+      ansible.builtin.command:
+        cmd: nvidia-smi
+      register: nvidia_smi_after_install
+    - name: Stop condor if not detected
+      ansible.builtin.systemd_service:
+        state: stopped
+        name: condor
+      when: nvidia_smi_after_install.rc != 0
+    - name: Fail if nvidia-smi failed
+      ansible.builtin.fail:
+        msg: GPU not working!
+      when: nvidia_smi_after_install.rc != 0

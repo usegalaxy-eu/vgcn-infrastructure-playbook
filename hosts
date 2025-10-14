@@ -4,6 +4,8 @@
 [divgpu4]
 # Nvidia L40S
 c128m512g4-n37104.bi.privat
+# Nvidia V100 32G vRAM
+c64m512g8-gpuv100.bi.privat
 [entiregpu]
 # Nvidia L40S
 c128m512g4-n37103.bi.privat

@@ -16,6 +16,10 @@
         name: condor
         state: reloaded
   pre_tasks:
+    - name: Install proprietary Nvidia driver
+      ansible.builtin.include_tasks:
+        file: tasks/install-nvidia-proprietary.yml
+      when: inventory_hostname == "c64m512g8-gpuv100.bi.privat"
     - name: Update Telegraf hostname
       ansible.builtin.lineinfile:
         path: "{{ telegraf_agent_config_path }}/telegraf.conf"
