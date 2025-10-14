@@ -95,6 +95,6 @@
 
   roles:
     - usegalaxy_eu.firewall
-    - grycap.htcondor
+   # - grycap.htcondor # reactivate when https://htcss-downloads.chtc.wisc.edu is back
     - usegalaxy-eu.autofs
     - usegalaxy_eu.restrict_docker_net
