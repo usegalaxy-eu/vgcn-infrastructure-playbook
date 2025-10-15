@@ -3,6 +3,7 @@
   ansible.builtin.command:
     cmd: nvidia-smi
   register: nvidia_smi
+  failed_when: false
 
 - name: Install if not
   when: nvidia_smi.rc != 0
@@ -37,6 +38,7 @@
       ansible.builtin.command:
         cmd: nvidia-smi
       register: nvidia_smi_after_install
+      failed_when: false
     - name: Stop condor if not detected
       ansible.builtin.systemd_service:
         state: stopped
