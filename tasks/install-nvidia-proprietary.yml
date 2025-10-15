@@ -8,11 +8,7 @@
 - name: Install if not
   when: nvidia_smi.rc != 0
   block:
-    - name: Gather the package facts
-      ansible.builtin.package_facts:
-        manager: auto
     - name: Remove old driver
-      when: ansible_facts.packages['nvidia-driver'].version != nvidia_proprietary_version
       ansible.builtin.dnf:
         state: absent
         name:
@@ -25,10 +21,10 @@
     - name: Download driver package
       ansible.builtin.get_url:
         url: "{{ nvidia_proprietary_url }}"
-        dest: "/{{ tmp }}/{{ nvidia_proprietary_url | split('/') | last }}"
+        dest: "/tmp/{{ nvidia_proprietary_url | split('/') | last }}"
     - name: Untar
       ansible.builtin.unarchive:
-        src: "/{{ tmp }}/{{ nvidia_proprietary_url | split('/') | last }}"
+        src: "/tmp/{{ nvidia_proprietary_url | split('/') | last }}"
         dest: "/{{ nvidia_tmp_dir.path }}"
         remote_src: true
     - name: Run installation script
