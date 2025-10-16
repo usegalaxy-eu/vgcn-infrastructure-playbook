@@ -28,8 +28,8 @@
         dest: "/{{ nvidia_tmp_dir.path }}"
         remote_src: true
     - name: Run installation script
-      ansible.builtin.script:
-        cmd: "/{{ nvidia_tmp_dir.path }}/NVIDIA-Linux-x86_64-{{ nvidia_proprietary_version }}.run -s"
+      ansible.builtin.command:
+        cmd: "{{ nvidia_tmp_dir.path }}/NVIDIA-Linux-x86_64-{{ nvidia_proprietary_version }}.run -s"
     - name: Check if nvidia-smi is successful
       ansible.builtin.command:
         cmd: nvidia-smi
