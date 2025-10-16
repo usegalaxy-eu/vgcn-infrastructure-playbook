@@ -18,4 +18,4 @@ roles:
     version: 2.0.0
   - src: https://github.com/usegalaxy-eu/ansible-restrict-docker-net
     name: usegalaxy_eu.restrict_docker_net
-    version: 0.0.2
+    version: 0.0.3
