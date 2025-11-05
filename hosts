@@ -1,10 +1,6 @@
 # Nodes that should receive docker network restrictions should go here
 [test]
-# AMD Rome 4-in-1
-c128m1024-n3809.bi.privat
-c128m1024-n3810.bi.privat
-c128m1024-n3811.bi.privat
-c128m1024-n3812.bi.privat
+
 [divgpu4]
 # Nvidia L40S
 c128m512g4-n37104.bi.privat
@@ -37,3 +33,8 @@ c192m1536-n3714.bi.privat
 c192m1536-n3715.bi.privat
 c192m1536-n3716.bi.privat
 c192m1536-n3717.bi.privat
+# AMD Rome 4-in-1
+c128m1024-n3809.bi.privat
+c128m1024-n3810.bi.privat
+c128m1024-n3811.bi.privat
+c128m1024-n3812.bi.privat
