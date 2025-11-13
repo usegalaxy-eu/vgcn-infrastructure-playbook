@@ -4,7 +4,7 @@
 
 {% if gpu_discovery_extra is defined %}GPU_DISCOVERY_EXTRA = {{ gpu_discovery_extra }} {% if gpu_division is defined %}-divide {{ gpu_division }}{% endif %}{% endif %}
 
-GalaxyTraining = "{{ galaxy_training }}"
+GalaxyTraining = {{ galaxy_training }}
 GalaxyGroup = "{{ galaxy_group }}"
 GalaxyCluster = "{{ galaxy_cluster }}"
 GalaxyDockerHack = {{ galaxy_docker_hack }}
