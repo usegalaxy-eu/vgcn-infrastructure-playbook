@@ -4,6 +4,7 @@ firewall_public_services: []
 firewall_internal_services: []
 firewall_restart_daemon: true
 
+galaxy_training: false
 galaxy_group: training-pxe-test
 galaxy_cluster: denbi
 galaxy_docker_hack: true
