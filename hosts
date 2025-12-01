@@ -9,13 +9,17 @@ c128m512g4-n37104.bi.privat
 c128m512g4-n37103.bi.privat
 # Nvidia T4
 c64m384g8-n3801.bi.privat
+[training_ki_bioinfo_2025]
+# scheduled cloud downtime at RZ on 2025-12-03, see https://github.com/usegalaxy-eu/issues/issues/812
+c192m1536-n3701.bi.privat
+[training_hefdi_galaxy]
+# scheduled cloud downtime at RZ on 2025-12-03, see https://github.com/usegalaxy-eu/issues/issues/812
+c192m1536-n3702.bi.privat
 [compute]
 tstimg.bi.privat
 # Intel Broadwell
 c32m2048-n3681.bi.privat
 # AMD Genoa
-c192m1536-n3701.bi.privat
-c192m1536-n3702.bi.privat
 c192m1536-n3703.bi.privat
 c192m1536-n3704.bi.privat
 c192m1536-n3705.bi.privat
