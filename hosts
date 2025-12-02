@@ -22,6 +22,8 @@ c192m1536-n3701.bi.privat
 # scheduled cloud downtime at RZ on 2025-12-03, see https://github.com/usegalaxy-eu/issues/issues/812
 c192m1536-n3702.bi.privat
 [compute]
+# Intel Broadwell
+c32m2048-n3681.bi.privat
 # AMD Genoa
 c192m1536-n3703.bi.privat
 c192m1536-n3704.bi.privat
