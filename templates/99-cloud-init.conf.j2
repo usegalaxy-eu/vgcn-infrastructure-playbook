@@ -1,8 +1,8 @@
 #jinja2: trim_blocks:False
-# Advertise the GPUs
-{% if htcondor_features is defined %}use feature : {{ htcondor_features }}{% endif %}
 
-{% if gpu_discovery_extra is defined %}GPU_DISCOVERY_EXTRA = {{ gpu_discovery_extra }} {% if gpu_division is defined %}-divide {{ gpu_division }}{% endif %}{% endif %}
+# Changing this file (by modifying variables) will result in a RELOAD of the condor daemons
+# on machines where it is copied to.
+# This means running jobs will continue to run.
 
 GalaxyTraining = {{ galaxy_training }}
 GalaxyGroup = "{{ galaxy_group }}"
