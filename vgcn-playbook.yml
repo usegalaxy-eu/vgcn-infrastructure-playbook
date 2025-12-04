@@ -103,7 +103,7 @@
         owner: root
         group: root
         mode: "0644"
-      notify: Reload HTCondor # Change to Restart HTCondor after this is deployed and verified on all nodes
+      notify: Restart HTCondor
 
   roles:
     - usegalaxy_eu.firewall
