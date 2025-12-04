@@ -6,13 +6,12 @@
 c192m1536-n3716.bi.privat
 tstimg.bi.privat
 [divgpu4]
-# Nvidia L40S
-c128m512g4-n37104.bi.privat
 # Nvidia V100 32G vRAM
 c64m512g8-gpuv100.bi.privat
 [entiregpu]
 # Nvidia L40S
 c128m512g4-n37103.bi.privat
+c128m512g4-n37104.bi.privat
 # Nvidia T4
 c64m384g8-n3801.bi.privat
 [training_ki_bioinfo_2025]
