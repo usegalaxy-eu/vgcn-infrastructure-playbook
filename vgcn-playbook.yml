@@ -15,6 +15,10 @@
       ansible.builtin.service:
         name: condor
         state: reloaded
+    - name: Restart HTCondor
+      ansible.builtin.service:
+        name: condor
+        state: restarted
   pre_tasks:
     - name: Install proprietary Nvidia driver
       ansible.builtin.include_tasks:
@@ -92,6 +96,14 @@
         group: root
         mode: "0644"
       notify: Reload HTCondor
+    - name: Template HTCondor host specific configuration macros.
+      ansible.builtin.template:
+        src: 98-macros.conf.j2
+        dest: /etc/condor/config.d/98-macros.conf
+        owner: root
+        group: root
+        mode: "0644"
+      notify: Reload HTCondor # Change to Restart HTCondor after this is deployed and verified on all nodes
 
   roles:
     - usegalaxy_eu.firewall

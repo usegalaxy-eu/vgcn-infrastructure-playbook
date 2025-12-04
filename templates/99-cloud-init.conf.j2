@@ -1,8 +1,4 @@
 #jinja2: trim_blocks:False
-# Advertise the GPUs
-{% if htcondor_features is defined %}use feature : {{ htcondor_features }}{% endif %}
-
-{% if gpu_discovery_extra is defined %}GPU_DISCOVERY_EXTRA = {{ gpu_discovery_extra }} {% if gpu_division is defined %}-divide {{ gpu_division }}{% endif %}{% endif %}
 
 GalaxyTraining = {{ galaxy_training }}
 GalaxyGroup = "{{ galaxy_group }}"
