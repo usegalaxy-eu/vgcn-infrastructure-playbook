@@ -1,9 +1,5 @@
 # Nodes that should receive docker network restrictions should go here
 [test]
-c128m1024-n3813.bi.privat
-c128m1024-n3814.bi.privat
-c128m1024-n3815.bi.privat
-c128m1024-n3816.bi.privat
 # Nodes that should run upload jobs only (e.g. if removed soon)
 [upload]
 c192m1536-n3716.bi.privat
@@ -46,3 +42,7 @@ c128m1024-n3809.bi.privat
 c128m1024-n3810.bi.privat
 c128m1024-n3811.bi.privat
 c128m1024-n3812.bi.privat
+c128m1024-n3813.bi.privat
+c128m1024-n3814.bi.privat
+c128m1024-n3815.bi.privat
+c128m1024-n3816.bi.privat
