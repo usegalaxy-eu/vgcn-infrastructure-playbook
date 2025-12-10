@@ -2,8 +2,6 @@
 [test]
 # Nodes that should run upload jobs only (e.g. if removed soon)
 [upload]
-c192m1536-n3716.bi.privat
-tstimg.bi.privat
 [divgpu4]
 # Nvidia V100 32G vRAM
 c64m512g8-gpuv100.bi.privat
@@ -32,6 +30,7 @@ c192m1536-n3712.bi.privat
 c192m1536-n3713.bi.privat
 c192m1536-n3714.bi.privat
 c192m1536-n3715.bi.privat
+c192m1536-n3716.bi.privat
 c192m1536-n3717.bi.privat
 # AMD Rome 4-in-1
 c128m1024-n3805.bi.privat
