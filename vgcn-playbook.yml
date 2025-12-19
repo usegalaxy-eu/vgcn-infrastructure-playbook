@@ -39,6 +39,15 @@
         group: telegraf
       no_log: true
       notify: Restart Telegraf
+    - name: Copy Cvmfs Telemetry Listener
+      ansible.builtin.template:
+        src: telegraf-cvmfs-listener.conf.j2
+        dest: "{{ telegraf_agent_config_path }}/telegraf.d/cvmfs-listener.conf"
+        mode: "0640"
+        owner: telegraf
+        group: telegraf
+      no_log: true
+      notify: Restart Telegraf
     - name: Deploy SLX disk monitor script
       ansible.builtin.copy:
         src: check_slx_disks.sh
