@@ -42,7 +42,7 @@
     - name: Copy Cvmfs Telemetry Listener
       ansible.builtin.template:
         src: telegraf-cvmfs-listener.conf.j2
-        dest: "{{ telegraf_agent_config_path }}/telegraf.d/telegraf-cvmfs-listener.conf"
+        dest: "{{ telegraf_agent_config_path }}/telegraf.d/cvmfs-listener.conf"
         mode: "0640"
         owner: telegraf
         group: telegraf
