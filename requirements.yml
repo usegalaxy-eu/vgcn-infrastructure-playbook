@@ -19,6 +19,5 @@ roles:
   - src: https://github.com/usegalaxy-eu/ansible-restrict-docker-net
     name: usegalaxy_eu.restrict_docker_net
     version: 0.0.3
-  - name: usegalaxy_eu.ansible_cvmfs
-    src: https://github.com/usegalaxy-eu/ansible-cvmfs
-    version: master
+  - src: galaxyproject.cvmfs
+    version: <PUT HERE THE LATEST VERSION AFTER PR MERGE>
