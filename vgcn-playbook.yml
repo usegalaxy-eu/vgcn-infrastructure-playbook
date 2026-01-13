@@ -119,3 +119,4 @@
     - grycap.htcondor
     - usegalaxy-eu.autofs
     - usegalaxy_eu.restrict_docker_net
+    - usegalaxy_eu.ansible_cvmfs
