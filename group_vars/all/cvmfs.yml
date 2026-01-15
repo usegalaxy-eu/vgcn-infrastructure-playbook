@@ -17,5 +17,5 @@ cvmfs_telemetry_rate: "60"
 cvmfs_influx_host: localhost
 cvmfs_influx_port: "8092"
 cvmfs_influx_metric_name: cvmfs_metrics
-cvmfs_influx_extra_tags: "{{ ansible_hostname }}"
+cvmfs_influx_extra_tags: "host=$HOSTNAME"
 cvmfs_influx_extra_fields: ""
