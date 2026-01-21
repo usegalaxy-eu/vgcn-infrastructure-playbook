@@ -20,4 +20,4 @@ roles:
     name: usegalaxy_eu.restrict_docker_net
     version: 0.0.3
   - src: galaxyproject.cvmfs
-    version: <PUT HERE THE LATEST VERSION AFTER PR MERGE>
+    version: 0.4.0
