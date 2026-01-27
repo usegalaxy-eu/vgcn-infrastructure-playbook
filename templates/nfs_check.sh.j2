@@ -28,7 +28,7 @@ timeout {{ nfs_check_timeout_sec }} ls {{ vol.path }} > /dev/null 2>&1 || {{ nfs
   {% endfor %}
 {% endfor %}
 
-echo "nfs.disks_available host=$(cat /etc/hostname) {{ parts|join(',') }}"
+echo "nfs.disks_available,host=$(cat /etc/hostname),timeout={{ nfs_check_timeout_sec}} {{ parts|join(',') }}"
 {%- endmacro %}
 #!/bin/bash
 # This script tests Galaxy EUs NFS mountpoints by trying to ls 
