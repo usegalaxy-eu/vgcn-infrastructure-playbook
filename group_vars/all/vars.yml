@@ -1,12 +1,6 @@
 ---
 ## NFS Tests
 nfs_check_var_prefix: nfs_
-nfs_check_mount_groups:
-  - cvmfs
-  - dnb
-  - jwd
-  - cache
-  - misc
 nfs_check_excluded_mounts: 
   - db
   - dnb04
