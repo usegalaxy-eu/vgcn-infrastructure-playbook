@@ -56,6 +56,14 @@
         group: root
         mode: 0755
       notify: Restart Telegraf
+    - name: Deploy NFS access monitor script
+      ansible.builtin.template:
+        src: nfs_check.sh.j2
+        dest: "{{ nfs_check_path }}"
+        owner: root
+        group: root
+        mode: 0755
+      notify: Restart Telegraf
     - name: "Copy telegraf extra plugins"
       template:
         src: "telegraf-extra-plugin.conf.j2"

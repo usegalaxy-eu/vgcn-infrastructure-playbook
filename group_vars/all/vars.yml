@@ -1,4 +1,24 @@
 ---
+## NFS Tests
+nfs_check_var_prefix: nfs_
+nfs_check_mount_groups:
+  - cvmfs
+  - dnb
+  - jwd
+  - cache
+  - misc
+nfs_check_excluded_mounts: 
+  - db
+  - dnb04
+  - dnb-ds01
+  - 5
+  - jwd01
+  - jwd02f
+  - jwd03f
+  - jwd04
+  - jwd05e
+nfs_check_timeout_sec: 10
+nfs_check_path: /usr/local/bin/check_nfs_access
 ## Firewall
 firewall_public_services: []
 firewall_internal_services: []
@@ -37,5 +57,12 @@ telegraf_plugins_extra:
     config:
       - commands = ["{{ check_slx_disks_path }}"]
       - timeout = "2m"
+      - data_format = "influx"
+      - interval = "1m"
+  check_nfs_access_telegraf:
+    plugin: exec
+    config:
+      - commands = ["{{ nfs_check_path }}"]
+      - timeout = "1m"
       - data_format = "influx"
       - interval = "1m"
