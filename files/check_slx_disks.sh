@@ -8,21 +8,23 @@ dmsetup="/dev/mapper/scratch * type=1
 /dev/mapper/tank * type=1
 /dev/mapper/root / type=1"
 disk_setup=0
+timeout_sec=10
+
 if [ "$(cat /run/openslx/dmsetup.state | grep -v "#" | cut -d, -f 1)" = "$dmsetup" ]; then
             disk_setup=1
 fi
 
 # Check for OPENSLX_SYS partition label
 openslx_label=0
-if timeout 5 blkid | grep -qs "OPENSLX_SYS"; then
+if timeout $timeout_sec blkid | grep -qs "OPENSLX_SYS"; then
             openslx_label=1
 fi
 
 # Check that scratch is mounted
 scratch=0
 SCRATCH_MOUNT=/scratch
-if [ "$disk_setup" ] && timeout 5 df | grep -qs "$SCRATCH_MOUNT"; then
+if [ "$disk_setup" ] && timeout $timeout_sec df | grep -qs "$SCRATCH_MOUNT"; then
             scratch=1
 fi
-timeout 5 df >> /dev/null && nfs=2 || nfs=0
+timeout $timeout_sec df >> /dev/null && nfs=2 || nfs=0
 echo "pxe.disk_mode,host=$(cat /etc/hostname) openslx_label=$openslx_label,scratch_mounted=$scratch,disksetup_ok=$disk_setup,nfs=$nfs"
