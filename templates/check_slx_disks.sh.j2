@@ -20,11 +20,16 @@ if timeout $timeout_sec blkid | grep -qs "OPENSLX_SYS"; then
             openslx_label=1
 fi
 
+# Run df only once
+df_out="$(timeout "$timeout_sec" df 2>/dev/null)"
+df_rc=$?
+
 # Check that scratch is mounted
 scratch=0
 SCRATCH_MOUNT=/scratch
-if [ "$disk_setup" ] && timeout $timeout_sec df | grep -qs "$SCRATCH_MOUNT"; then
-            scratch=1
+if [ "$disk_setup" -eq 1 ] && echo "$df_out" | grep -qs "$SCRATCH_MOUNT"; then
+    scratch=1
 fi
-timeout $timeout_sec df >> /dev/null && nfs=2 || nfs=0
+# Determine nfs status based on df execution result
+[ "$df_rc" -eq 0 ] && nfs=2 || nfs=0
 echo "pxe.disk_mode,host=$(cat /etc/hostname) openslx_label=$openslx_label,scratch_mounted=$scratch,disksetup_ok=$disk_setup,nfs=$nfs"
