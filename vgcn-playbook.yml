@@ -4,6 +4,7 @@
   vars_files:
     - mounts/dest/all.yml
     - mounts/mountpoints.yml
+    - mounts/vars.yml
   vars:
     internal: true
   handlers:
