@@ -4,6 +4,7 @@
   vars_files:
     - mounts/dest/all.yml
     - mounts/mountpoints.yml
+    - mounts/vars.yml
   vars:
     internal: true
   handlers:
@@ -52,6 +53,14 @@
       ansible.builtin.copy:
         src: check_slx_disks.sh
         dest: "{{ check_slx_disks_path }}"
+        owner: root
+        group: root
+        mode: 0755
+      notify: Restart Telegraf
+    - name: Deploy NFS access monitor script
+      ansible.builtin.template:
+        src: nfs_check.sh.j2
+        dest: "{{ nfs_check_path }}"
         owner: root
         group: root
         mode: 0755

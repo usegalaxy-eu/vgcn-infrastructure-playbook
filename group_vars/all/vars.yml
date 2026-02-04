@@ -39,3 +39,10 @@ telegraf_plugins_extra:
       - timeout = "2m"
       - data_format = "influx"
       - interval = "1m"
+  check_nfs_access_telegraf:
+    plugin: exec
+    config:
+      - commands = ["{{ nfs_check_path }}"]
+      - timeout = "1m"
+      - data_format = "influx"
+      - interval = "1m"
