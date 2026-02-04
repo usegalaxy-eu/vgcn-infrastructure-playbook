@@ -8,7 +8,7 @@ dmsetup="/dev/mapper/scratch * type=1
 /dev/mapper/tank * type=1
 /dev/mapper/root / type=1"
 disk_setup=0
-timeout_sec=10
+timeout_sec={{ nfs_check_timeout_sec }}
 
 if [ "$(cat /run/openslx/dmsetup.state | grep -v "#" | cut -d, -f 1)" = "$dmsetup" ]; then
             disk_setup=1
