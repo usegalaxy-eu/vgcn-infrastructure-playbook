@@ -129,13 +129,6 @@
 
     - usegalaxy-eu.autofs
     - galaxyproject.cvmfs
+    - cvmfs_cache_dir
 
     - grycap.htcondor
-  tasks:
-    - name: Ensure CVMFS disk cache directory exists
-      ansible.builtin.file:
-        path: "{{ cvmfs_cache_disk_base }}"
-        state: directory
-        owner: cvmfs
-        group: cvmfs
-        mode: "0770"
