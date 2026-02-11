@@ -125,10 +125,7 @@
 
   roles:
     - usegalaxy_eu.firewall
-    - usegalaxy_eu.restrict_docker_net
-
-    - usegalaxy-eu.autofs
-    - galaxyproject.cvmfs
-    - cvmfs_cache_dir
-
     - grycap.htcondor
+    - usegalaxy-eu.autofs
+    - usegalaxy_eu.restrict_docker_net
+    - galaxyproject.cvmfs
