@@ -26,6 +26,7 @@ autofs_mount_points:
   - usrlocal
   - usrlocal_celerycluster # which is actually /opt/galaxy
   - cache
+  - cvac
   - misc
 
 ## Telegraf
