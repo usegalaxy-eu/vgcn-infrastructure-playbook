@@ -26,6 +26,7 @@ autofs_mount_points:
   - usrlocal
   - usrlocal_celerycluster # which is actually /opt/galaxy
   - cache
+  - cvac
   - misc
 
 ## Telegraf
@@ -37,5 +38,12 @@ telegraf_plugins_extra:
     config:
       - commands = ["{{ check_slx_disks_path }}"]
       - timeout = "2m"
+      - data_format = "influx"
+      - interval = "1m"
+  check_nfs_access_telegraf:
+    plugin: exec
+    config:
+      - commands = ["{{ nfs_check_path }}"]
+      - timeout = "1m"
       - data_format = "influx"
       - interval = "1m"

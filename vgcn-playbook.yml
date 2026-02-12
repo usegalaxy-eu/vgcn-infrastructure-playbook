@@ -4,6 +4,7 @@
   vars_files:
     - mounts/dest/all.yml
     - mounts/mountpoints.yml
+    - mounts/vars.yml
   vars:
     internal: true
   handlers:
@@ -39,10 +40,27 @@
         group: telegraf
       no_log: true
       notify: Restart Telegraf
+    - name: Copy Cvmfs Telemetry Listener
+      ansible.builtin.template:
+        src: telegraf-cvmfs-listener.conf.j2
+        dest: "{{ telegraf_agent_config_path }}/telegraf.d/cvmfs-listener.conf"
+        mode: "0640"
+        owner: telegraf
+        group: telegraf
+      no_log: true
+      notify: Restart Telegraf
     - name: Deploy SLX disk monitor script
-      ansible.builtin.copy:
-        src: check_slx_disks.sh
+      ansible.builtin.template:
+        src: check_slx_disks.sh.j2
         dest: "{{ check_slx_disks_path }}"
+        owner: root
+        group: root
+        mode: 0755
+      notify: Restart Telegraf
+    - name: Deploy NFS access monitor script
+      ansible.builtin.template:
+        src: nfs_check.sh.j2
+        dest: "{{ nfs_check_path }}"
         owner: root
         group: root
         mode: 0755
@@ -103,10 +121,14 @@
         owner: root
         group: root
         mode: "0644"
-      notify: Reload HTCondor # Change to Restart HTCondor after this is deployed and verified on all nodes
+      notify: Restart HTCondor
 
   roles:
     - usegalaxy_eu.firewall
-    - grycap.htcondor
-    - usegalaxy-eu.autofs
     - usegalaxy_eu.restrict_docker_net
+
+    - usegalaxy-eu.autofs
+    - galaxyproject.cvmfs
+    - cvmfs_cache_dir
+
+    - grycap.htcondor
