@@ -1,7 +1,7 @@
 # Nodes that should receive docker network restrictions should go here
 [test]
-# Nodes that should run upload jobs only (e.g. if removed soon)
-[upload]
+# Nodes that should run internal Galaxy tools, like upload or expressions (short running)
+[internal]
 [divgpu4]
 # Nvidia V100 32G vRAM
 c64m512g8-gpuv100.bi.privat
