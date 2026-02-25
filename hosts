@@ -11,10 +11,9 @@ c128m512g4-n37103.bi.privat
 c128m512g4-n37104.bi.privat
 # Nvidia T4
 c64m384g8-n3801.bi.privat
-[training_ga_uba_2026]
-c192m1536-n3701.bi.privat  # (will become the general TIaaS node after merging usegalaxy-eu/vgcn-infrastructure-playbook#45)
-[training_mastervhir2026]
-c128m1024-n3805.bi.privat  # AMD Rome 4-in-1
+[tiaas]
+# General TIaaS node
+c192m1536-n3701.bi.privat
 [compute]
 # Intel Broadwell
 c32m2048-n3681.bi.privat
@@ -36,6 +35,7 @@ c192m1536-n3715.bi.privat
 c192m1536-n3716.bi.privat
 c192m1536-n3717.bi.privat
 # AMD Rome 4-in-1
+c128m1024-n3805.bi.privat
 c128m1024-n3806.bi.privat
 c128m1024-n3807.bi.privat
 c128m1024-n3808.bi.privat
