@@ -97,6 +97,13 @@
         owner: root
         group: root
         mode: "0755"
+    - name: Ensure apptainer cache exists
+      ansible.builtin.file:
+        path: /scratch/singularity/
+        state: directory
+        owner: galaxy
+        group: galaxy
+        mode: "0700"
   post_tasks:
     - name: Template HTCondor local configuration.
       ansible.builtin.template:
