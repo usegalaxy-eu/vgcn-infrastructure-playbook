@@ -104,6 +104,13 @@
         owner: galaxy
         group: galaxy
         mode: "0700"
+    - name: Ensure python chache exists (PYTHONPYCACHEPREFIX)
+      ansible.builtin.file:
+        path: /scratch/pythoncache/
+        state: directory
+        owner: galaxy
+        group: galaxy
+        mode: "0700"
   post_tasks:
     - name: Template HTCondor local configuration.
       ansible.builtin.template:
