@@ -1,4 +1,12 @@
 ---
+# Mounts the nfs cvmfs alien cache with autofs (needed for when a vgcn as been rebooted)
+- name: Check directory exists silently
+  stat:
+    path: "{{ cvac.cvac08.path }}"
+  register: _cvac_path
+  changed_when: false
+  no_log: true
+
 - name: Ensure CVMFS disk cache directory exists
   ansible.builtin.file:
     path: "{{ cvmfs_cache_disk_base }}"
