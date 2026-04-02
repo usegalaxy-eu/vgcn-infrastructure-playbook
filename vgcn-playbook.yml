@@ -145,4 +145,5 @@
     - galaxyproject.cvmfs
     - cvmfs_cache_dir
 
-    - grycap.htcondor
+    - role: grycap.htcondor
+      when: inventory_hostname != "c128m512g4-n37104.bi.privat"
