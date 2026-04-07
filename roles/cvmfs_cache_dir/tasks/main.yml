@@ -3,7 +3,6 @@
 - name: Check directory exists silently
   stat:
     path: "{{ cvac.cvac08.path }}"
-  register: _cvac_path
   changed_when: false
   no_log: true
 
