@@ -14,3 +14,7 @@
     owner: cvmfs
     group: cvmfs
     mode: "0770"
+
+- name: Reload cvmfs
+  ansible.builtin.command: cvmfs_config reload
+  become: true

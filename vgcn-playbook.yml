@@ -142,7 +142,7 @@
     - usegalaxy_eu.restrict_docker_net
 
     - usegalaxy-eu.autofs
-    - cvmfs_cache_dir
     - galaxyproject.cvmfs
+    - cvmfs_cache_dir
 
     - grycap.htcondor
