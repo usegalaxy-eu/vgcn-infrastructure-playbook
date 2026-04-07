@@ -1,0 +1,5 @@
+- name: Check directory exists silently
+  stat:
+    path: "{{ cvac.cvac08.path }}"
+  changed_when: false
+  no_log: true
