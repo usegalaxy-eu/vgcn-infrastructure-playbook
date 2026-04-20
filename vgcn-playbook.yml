@@ -138,12 +138,12 @@
       notify: Restart HTCondor
 
   roles:
-    - usegalaxy_eu.firewall
-    - usegalaxy_eu.restrict_docker_net
+   - usegalaxy_eu.firewall
+   - usegalaxy_eu.restrict_docker_net
 
-    - usegalaxy-eu.autofs
-    - cvmfs_stat_cvac
-    - galaxyproject.cvmfs
-    - cvmfs_cache_dir
+   - usegalaxy-eu.autofs
+   - cvmfs_stat_cvac
+   - galaxyproject.cvmfs
+   - cvmfs_cache_dir
 
-    - grycap.htcondor
+   - grycap.htcondor

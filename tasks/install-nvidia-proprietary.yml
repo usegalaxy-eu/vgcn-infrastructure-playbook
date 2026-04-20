@@ -8,11 +8,18 @@
 - name: Install if not
   when: nvidia_smi.rc != 0
   block:
-    - name: Remove old driver
+    - name: Remove old driver RHEL 9
       ansible.builtin.dnf:
         state: absent
         name:
           - nvidia-driver
+      when: ansible_distribution_major_version == '9'
+    - name: Remove old driver RHEL 10
+      ansible.builtin.dnf:
+        state: present
+        name: cuda-drivers
+        allowerasing: true
+      when: ansible_distribution_major_version == '10'
     - name: Create temporary build directory
       ansible.builtin.tempfile:
         state: directory
