@@ -1,1 +1,5 @@
 .vault_password
+collections/*
+roles/galaxy*
+roles/usegalaxy*
+roles/grycap.htcondor/*
