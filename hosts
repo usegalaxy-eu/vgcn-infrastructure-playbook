@@ -18,7 +18,7 @@ c192m1536-n3701.bi.privat
 # Intel Broadwell
 c32m2048-n3681.bi.privat
 # AMD Genoa
-c192m1536-n3702.bi.privat
+#c192m1536-n3702.bi.privat # UNCOMMNET ME (TESTING SLX DISK CONDOR MONITOR - CHECK PR)
 c192m1536-n3703.bi.privat
 c192m1536-n3704.bi.privat
 c192m1536-n3705.bi.privat
