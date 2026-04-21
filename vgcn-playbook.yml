@@ -59,8 +59,8 @@
       notify: Restart Telegraf
     - name: Deploy SLX disk monitor script
       ansible.builtin.template:
-        src: check_slx_condor.sh.j2
-        dest: "{{ check_slx_condor_path }}"
+        src: check_nfs_condor.sh.j2
+        dest: "{{ check_nfs_condor_path }}"
         owner: root
         group: root
         mode: 0755

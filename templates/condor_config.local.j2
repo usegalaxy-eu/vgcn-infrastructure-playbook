@@ -49,12 +49,12 @@ CLAIM_WORKLIFE = {{ htcondor_claim_worklife }}
 NEGOTIATOR_POST_JOB_RANK = {{ htcondor_negotiator_post_job_rank }}
 
 # Health Check
-STARTD_CRON_JOBLIST = $(STARTD_CRON_JOBLIST) slxcheck
-STARTD_CRON_slxcheck_EXECUTABLE = /usr/local/bin/check_slx_condor.sh
-STARTD_CRON_slxcheck_PERIOD = 5m
-STARTD_CRON_slxcheck_MODE = periodic
+STARTD_CRON_JOBLIST = $(STARTD_CRON_JOBLIST) nfscheck
+STARTD_CRON_nfscheck_EXECUTABLE = /usr/local/bin/check_nfs_condor.sh
+STARTD_CRON_nfscheck_PERIOD = 5m
+STARTD_CRON_nfscheck_MODE = periodic
 
-START = ($(START)) && (NFS_Available == True) && (SLX_ScratchMounted == 1)
-STARTD_ATTRS = $(STARTD_ATTRS) NFS_Available SLX_ScratchMounted SLX_DiskSetupOk
+STARTD_ATTRS = $(STARTD_ATTRS) NFS_Available
 
-WANT_VACATE = (NFS_Available == False) || (SLX_ScratchMounted == 0)
+WANT_VACATE = (NFS_Available == False)
+START = ($(START)) && (NFS_Available == True)
