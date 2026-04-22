@@ -50,11 +50,13 @@ NEGOTIATOR_POST_JOB_RANK = {{ htcondor_negotiator_post_job_rank }}
 
 # Health Check
 STARTD_CRON_JOBLIST = $(STARTD_CRON_JOBLIST) nfscheck
-STARTD_CRON_nfscheck_EXECUTABLE = /usr/local/bin/check_nfs_condor.sh
-STARTD_CRON_nfscheck_PERIOD = 5m
-STARTD_CRON_nfscheck_MODE = periodic
+STARTD_CRON_NFSCHECK_EXECUTABLE = /usr/local/bin/check_nfs_condor.sh
+STARTD_CRON_NFSCHECK_PERIOD = 1m
+STARTD_CRON_NFSCHECK_MODE = Periodic
+STARTD_CRON_NFSCHECK_KILL = True
 
-STARTD_ATTRS = $(STARTD_ATTRS) NFS_Available
+STARTD_ATTRS = $(STARTD_ATTRS) NFS_AVAILABLE
 
-WANT_VACATE = (NFS_Available == False)
-START = ($(START)) && (NFS_Available == True)
+START = $(START) && (NFS_AVAILABLE =?= true || NFS_AVAILABLE == "true")
+WANT_VACATE = (NFS_Available =?= false)
+KILL = (NFS_Available =?= false)
