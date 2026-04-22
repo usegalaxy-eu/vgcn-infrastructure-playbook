@@ -1,0 +1,15 @@
+#!/bin/bash
+# This script tests Galaxy EUs NFS mountpoints and reports to HTCondor
+
+all_nfs_ok="True"
+TIMEOUT={{ nfs_check_timeout_sec }}
+
+{% for group in [cvmfs, dnb, jwd, cache, misc] %}
+  {% for vol in group.values() %}
+    {% if vol.name not in nfs_check_excluded_mounts %}
+timeout $TIMEOUT ls {{ vol.path }} > /dev/null 2>&1 || { echo "NFS_AVAILABLE=false"; exit 0; }
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+
+echo "NFS_AVAILABLE=true"
