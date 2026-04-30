@@ -138,6 +138,8 @@
       notify: Restart HTCondor
 
   roles:
+    - docker_seccomp
+
     - usegalaxy_eu.firewall
     - usegalaxy_eu.restrict_docker_net
 

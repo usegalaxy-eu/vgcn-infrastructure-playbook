@@ -1,0 +1,5 @@
+---
+- name: Reload Docker daemon (docker_seccomp)
+  ansible.builtin.systemd:
+    name: docker
+    state: reloaded
