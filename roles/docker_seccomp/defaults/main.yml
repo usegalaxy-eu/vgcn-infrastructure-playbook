@@ -1,0 +1,6 @@
+docker_config_dir: /etc/docker/
+docker_config_file: "{{ docker_config_dir }}/daemon.json"
+docker_seccomp_config_file: "{{ docker_config_dir }}/seccomp.json"
+
+docker_default_seccomp_profile_url: https://raw.githubusercontent.com/moby/profiles/027dbabc38b1cf3163c369c7468e8041cd84962d/seccomp/default.json
+docker_default_seccomp_profile_sha256: e40d78f7f0173467a5dfe32bb96227b78bdb92b0aa32ccd07600dacb09d4f454

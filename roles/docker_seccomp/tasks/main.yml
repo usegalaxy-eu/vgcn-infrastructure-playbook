@@ -1,0 +1,105 @@
+---
+- name: Initialize seccomp fragment list
+  ansible.builtin.set_fact:
+    docker_seccomp_patch_files: []
+
+- name: Fetch Docker's default seccomp profile
+  when: docker_default_seccomp_profile_url is defined
+  block:
+    - name: Fetch Docker default seccomp profile into a variable
+      ansible.builtin.uri:
+        url: "{{ docker_default_seccomp_profile_url }}"
+        method: GET
+        return_content: true
+        status_code: 200
+      register: docker_default_seccomp_profile_fetch
+      delegate_to: localhost
+      run_once: true
+      changed_when: false
+
+    - name: Verify Docker default seccomp profile checksum
+      ansible.builtin.assert:
+        that: (docker_default_seccomp_profile_fetch.content | hash('sha256')) == docker_default_seccomp_profile_sha256
+      when: docker_default_seccomp_profile_sha256 is defined
+
+    - name: Save Docker default seccomp profile to variable
+      ansible.builtin.set_fact:
+        docker_default_seccomp_profile_content: "{{ docker_default_seccomp_profile_fetch.content | from_json }}"
+
+    - name: Add Docker default seccomp profile fragment
+      ansible.builtin.set_fact:
+        docker_seccomp_patch_files: >-
+          {{ docker_seccomp_patch_files + [{
+              'name': 'default.json',
+              'content': docker_default_seccomp_profile_content
+            }] }}
+
+- name: Add seccomp fragments from role and playbook files dirs
+  ansible.builtin.set_fact:
+    docker_seccomp_patch_files: >-
+      {{ docker_seccomp_patch_files + [{
+          'name': item | basename,
+          'path': item
+        }] }}
+  loop: >-
+    {{
+      (
+        query('ansible.builtin.fileglob', role_path ~ '/files/*.json')
+        + query('ansible.builtin.fileglob', playbook_dir ~ '/files/' ~ role_name ~ '/docker_seccomp/*.json')
+      )
+      | unique
+    }}
+
+- name: Initialize seccomp profile
+  ansible.builtin.set_fact:
+    docker_seccomp_merged: {}
+
+- name: Merge seccomp profile fragments
+  ansible.builtin.set_fact:
+    docker_seccomp_merged: >-
+      {{
+        docker_seccomp_merged
+        | combine(
+            (item.content if item.content is defined else (lookup('ansible.builtin.file', item.path) | from_json)),
+            recursive=True,
+            list_merge='append'
+          )
+      }}
+  loop: "{{ docker_seccomp_patch_files }}"
+
+- name: Write merged Docker seccomp profile
+  ansible.builtin.copy:
+    dest: "{{ docker_seccomp_config_file }}"
+    content: "{{ docker_seccomp_merged | to_nice_json }}"
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Check whether Docker daemon config exists
+  ansible.builtin.stat:
+    path: "{{ docker_config_file }}"
+  register: docker_daemon_config_stat
+
+- name: Read existing Docker daemon config
+  ansible.builtin.slurp:
+    src: "{{ docker_config_file }}"
+  register: docker_daemon_config_slurp
+  when: docker_daemon_config_stat.stat.exists and docker_daemon_config_stat.stat.size > 0
+
+- name: Merge Docker daemon config with seccomp profile directive
+  ansible.builtin.set_fact:
+    docker_daemon_config_merged: >-
+      {{
+        (docker_daemon_config_slurp.content | default('e30K') | b64decode | from_json)
+        | combine({'seccomp-profile': docker_seccomp_config_file}, recursive=True)
+      }}
+    # e30K is base64 for {}
+
+- name: Write merged Docker daemon config
+  ansible.builtin.copy:
+    dest: "{{ docker_config_file }}"
+    content: "{{ docker_daemon_config_merged | to_nice_json }}"
+    owner: "{{ docker_daemon_config_stat.stat.exists | ternary(docker_daemon_config_stat.stat.uid, 'root') }}"
+    group: "{{ docker_daemon_config_stat.stat.exists | ternary(docker_daemon_config_stat.stat.gid, 'root') }}"
+    mode: "{{ docker_daemon_config_stat.stat.exists | ternary(docker_daemon_config_stat.stat.mode, '0644') }}"
+  notify: Reload Docker daemon (docker_seccomp)
