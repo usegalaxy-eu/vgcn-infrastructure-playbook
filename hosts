@@ -7,7 +7,7 @@
 c64m512g8-gpuv100.bi.privat
 [entiregpu]
 # Nvidia L40S
-c128m512g4-n37103.bi.privat
+#c128m512g4-n37103.bi.privat # UNCOMMENT ME (MAYBE FAULTY DISK ???)
 c128m512g4-n37104.bi.privat
 # Nvidia T4
 c64m384g8-n3801.bi.privat
