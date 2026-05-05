@@ -9,7 +9,7 @@ collections:
 roles:
   - name: grycap.htcondor
     src: https://github.com/usegalaxy-eu/ansible-htcondor-grycap
-    version: d9a4aab0052dfb31d48c986d39a7f5e3692abba4
+    version: 4cd9dffeb5d18e6d2287b8c9e4eca5b3be7007e6
   - name: usegalaxy-eu.autofs
     src: https://github.com/usegalaxy-eu/ansible-autofs
     version: 1.4.0
@@ -19,5 +19,6 @@ roles:
   - src: https://github.com/usegalaxy-eu/ansible-restrict-docker-net
     name: usegalaxy_eu.restrict_docker_net
     version: 0.0.3
-  - src: galaxyproject.cvmfs
-    version: 0.5.0
+  - src: https://github.com/gsaudade99/ansible-cvmfs
+    name: galaxyproject.cvmfs
+    version: e2432c9092af18888973709ba7e8a8f44ccf3733
