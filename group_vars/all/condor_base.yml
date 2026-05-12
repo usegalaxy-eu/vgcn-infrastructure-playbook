@@ -1,5 +1,5 @@
 ---
-htcondor_server: "build.galaxyproject.eu"
+htcondor_server: "central-manager.bi.privat"
 htcondor_domain: bi.uni-freiburg.de
 htcondor_server_port: 9628
 htcondor_shared_port: 9628
