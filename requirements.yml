@@ -9,7 +9,7 @@ collections:
 roles:
   - name: grycap.htcondor
     src: https://github.com/usegalaxy-eu/ansible-htcondor-grycap
-    version: 4cd9dffeb5d18e6d2287b8c9e4eca5b3be7007e6
+    version: 33ea3aafd9c5d33a1063534e0604631696c052f9
   - name: usegalaxy-eu.autofs
     src: https://github.com/usegalaxy-eu/ansible-autofs
     version: 1.4.0
