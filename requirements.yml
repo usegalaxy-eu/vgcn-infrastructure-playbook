@@ -21,4 +21,4 @@ roles:
     version: 0.0.3
   - src: https://github.com/gsaudade99/ansible-cvmfs
     name: galaxyproject.cvmfs
-    version: e2432c9092af18888973709ba7e8a8f44ccf3733
+    version: a741d183cb6a5990639f8c814d6f0f19395e1f47
