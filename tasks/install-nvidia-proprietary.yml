@@ -11,12 +11,10 @@
     - name: Add NVIDIA CUDA repo RHEL 10
       ansible.builtin.command:
         cmd: dnf config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/rhel10/x86_64/cuda-rhel10.repo
-      when: ansible_distribution_major_version == '10'
 
     - name: Clean DNF cache
       ansible.builtin.command:
         cmd: dnf clean expire-cache
-      when: ansible_distribution_major_version == '10'
 
     - name: Remove conflicting driver RHEL 10
       ansible.builtin.dnf:
@@ -25,11 +23,9 @@
           - cuda-drivers
           - nvidia-driver
         autoremove: true
-      when: ansible_distribution_major_version == '10'
 
     - name: Install cuda-drivers 580.65.06 RHEL 10
       ansible.builtin.dnf:
         state: present
         name: cuda-drivers-580.65.06
         allowerasing: true
-      when: ansible_distribution_major_version == '10'
