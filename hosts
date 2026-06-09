@@ -12,9 +12,9 @@ c128m512g4-n37104.bi.privat
 # Nvidia T4
 c64m384g8-n3801.bi.privat
 [tiaas]
+[compute]
 # General TIaaS node
 c192m1536-n3701.bi.privat
-[compute]
 # Intel Broadwell
 c32m2048-n3681.bi.privat
 # AMD Genoa
