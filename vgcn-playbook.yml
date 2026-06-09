@@ -111,7 +111,35 @@
         owner: galaxy
         group: galaxy
         mode: "0700"
+    - name: Create mount for tmp because autofs-1:5.1.7-60 relies on it
+      ansible.builtin.copy:
+        content: |
+          [Unit]
+          Description=Mount NFS Share for Libvirt
+          Requires=network-online.target
+          After=network-online.target
+          Before=autofs.service
+          
+          [Mount]
+          What=denbi.svm.bwsfs.uni-freiburg.de:/ws01/jwd/tmp
+          Where=/tmp
+          Type=nfs
+          Options=hard,rw,nosuid,nconnect=2,vers=3
+          
+          [Install]
+          RequiredBy=autofs.service
+        dest: /etc/systemd/system/tmp.mount 
   post_tasks:
+    - name: Enable the service
+      ansible.builtin.systemd_service:
+        daemon_reload: true
+        state: started
+        enabled: true
+        name: tmp.mount
+    - name: Restart autofs
+      ansible.builtin.systemd_service:
+        name: autofs.service
+        state: restarted
     - name: Template HTCondor local configuration.
       ansible.builtin.template:
         src: condor_config.local.j2
