@@ -119,16 +119,16 @@
           Requires=network-online.target
           After=network-online.target
           Before=autofs.service
-          
+
           [Mount]
           What=denbi.svm.bwsfs.uni-freiburg.de:/ws01/jwd/tmp
           Where=/tmp
           Type=nfs
           Options=hard,rw,nosuid,nconnect=2,vers=3
-          
+
           [Install]
           RequiredBy=autofs.service
-        dest: /etc/systemd/system/tmp.mount 
+        dest: /etc/systemd/system/tmp.mount
   post_tasks:
     - name: Enable the service
       ansible.builtin.systemd_service:
