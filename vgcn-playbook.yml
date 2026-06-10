@@ -116,26 +116,26 @@
         content: |
           [Unit]
           Description=Mount NFS Share for Libvirt
-          Requires=network-online.target
-          After=network-online.target
+          Requires=network-online.target rpcbind.service
+          After=network-online.target rpcbind.service nfs-client.target
           Before=autofs.service
-          
+
           [Mount]
           What=denbi.svm.bwsfs.uni-freiburg.de:/ws01/jwd/tmp
           Where=/tmp
           Type=nfs
           Options=hard,rw,nosuid,nconnect=2,vers=3
-          
+
           [Install]
           RequiredBy=autofs.service
-        dest: /etc/systemd/system/tmp.mount 
-  post_tasks:
+        dest: /etc/systemd/system/tmp.mount
     - name: Enable the service
       ansible.builtin.systemd_service:
         daemon_reload: true
         state: started
         enabled: true
         name: tmp.mount
+  post_tasks:
     - name: Restart autofs
       ansible.builtin.systemd_service:
         name: autofs.service
