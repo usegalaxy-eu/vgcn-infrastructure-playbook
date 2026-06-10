@@ -129,13 +129,13 @@
           [Install]
           RequiredBy=autofs.service
         dest: /etc/systemd/system/tmp.mount
-  post_tasks:
     - name: Enable the service
       ansible.builtin.systemd_service:
         daemon_reload: true
         state: started
         enabled: true
         name: tmp.mount
+  post_tasks:
     - name: Restart autofs
       ansible.builtin.systemd_service:
         name: autofs.service
