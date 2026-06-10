@@ -6,6 +6,7 @@ collections:
     version: 3.12.1
     source: https://galaxy.ansible.com
     type: galaxy
+  - name: community.general
 roles:
   - name: grycap.htcondor
     src: https://github.com/usegalaxy-eu/ansible-htcondor-grycap
