@@ -6,13 +6,14 @@ collections:
     version: 3.12.1
     source: https://galaxy.ansible.com
     type: galaxy
+  - name: community.general
 roles:
   - name: grycap.htcondor
     src: https://github.com/usegalaxy-eu/ansible-htcondor-grycap
     version: 33ea3aafd9c5d33a1063534e0604631696c052f9
   - name: usegalaxy-eu.autofs
     src: https://github.com/usegalaxy-eu/ansible-autofs
-    version: 1.4.0
+    version: 1.4.2
   - src: https://github.com/usegalaxy-eu/ansible-fw-glxeu-generic
     name: usegalaxy_eu.firewall
     version: 2.0.0

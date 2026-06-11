@@ -47,3 +47,9 @@ telegraf_plugins_extra:
       - timeout = "1m"
       - data_format = "influx"
       - interval = "1m"
+  check_systemd:
+    plugin: systemd_units
+    config:
+      - unittype = "service"
+      - timeout = "5s"
+      - pattern = "autofs* condor* telegraf*"
