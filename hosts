@@ -46,4 +46,4 @@ c128m1024-n3812.bi.privat
 c128m1024-n3813.bi.privat
 c128m1024-n3814.bi.privat
 c128m1024-n3815.bi.privat
-c128m1024-n3816.bi.privat
+#c128m1024-n3816.bi.privat  # working, but detached from CI to test a filesystem healthcheck integrated with HTCondor
