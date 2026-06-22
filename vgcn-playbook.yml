@@ -112,10 +112,6 @@
         group: galaxy
         mode: "0700"
   post_tasks:
-    - name: Restart autofs
-      ansible.builtin.systemd_service:
-        name: autofs.service
-        state: restarted
     - name: Template HTCondor local configuration.
       ansible.builtin.template:
         src: condor_config.local.j2
