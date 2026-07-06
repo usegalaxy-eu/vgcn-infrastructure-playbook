@@ -153,6 +153,8 @@
           notify: Restart HTCondor
           loop: "{{ htcondor_token_files.files }}"
   roles:
+    - dirtyclone_mitigation
+
     - usegalaxy_eu.firewall
     - usegalaxy_eu.restrict_docker_net
 
