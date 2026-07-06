@@ -23,7 +23,6 @@
   register: dirtyclone_rmmod
   changed_when: dirtyclone_rmmod.rc == 0
   failed_when: false
-  when: dirtyclone_mitigation_modprobe_conf.changed
 
 - name: Flush filesystem buffers to disk
   ansible.builtin.command: sync
@@ -36,3 +35,4 @@
     value: "3"
     state: present
     sysctl_set: true
+  when: dirtyclone_mitigation_modprobe_conf.changed
