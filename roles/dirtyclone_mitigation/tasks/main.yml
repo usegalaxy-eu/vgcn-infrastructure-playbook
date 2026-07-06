@@ -12,6 +12,7 @@
        blacklist esp4
        blacklist esp6
        blacklist rxrpc
+  register: dirtyclone_mitigation_modprobe_conf
 
 - name: Unload DirtyClone-related modules if currently loaded
   ansible.builtin.command: "modprobe -r {{ item }}"
@@ -22,10 +23,12 @@
   register: dirtyclone_rmmod
   changed_when: dirtyclone_rmmod.rc == 0
   failed_when: false
+  when: dirtyclone_mitigation_modprobe_conf.changed
 
 - name: Flush filesystem buffers to disk
   ansible.builtin.command: sync
   changed_when: false
+  when: dirtyclone_mitigation_modprobe_conf.changed
 
 - name: Drop filesystem caches
   ansible.posix.sysctl:
