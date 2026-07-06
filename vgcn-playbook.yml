@@ -23,12 +23,9 @@
   pre_tasks:
     - name: Enable the Rocky Linux security repository
       # https://rockylinux.org/news/2026-05-14-introducing-security-repository
-      ansible.builtin.ini_file:
-        path: /etc/yum.repos.d/rocky-security.repo
-        section: security
-        option: enabled
-        value: "1"
-        mode: "0644"
+      community.general.dnf_config_manager:
+        name: security
+        state: enabled
 
     - name: Install proprietary Nvidia driver
       ansible.builtin.include_tasks:
