@@ -111,6 +111,13 @@
         owner: galaxy
         group: galaxy
         mode: "0700"
+    - name: Ensure CVMFS scratch directory exists
+      ansible.builtin.file:
+        path: /scratch/cvmfs/
+        state: directory
+        owner: cvmfs
+        group: cvmfs
+        mode: "0755"
   post_tasks:
     - name: Template HTCondor local configuration.
       ansible.builtin.template:
