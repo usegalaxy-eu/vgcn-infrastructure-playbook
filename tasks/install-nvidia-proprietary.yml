@@ -34,6 +34,10 @@
         src: "/tmp/{{ nvidia_proprietary_url | split('/') | last }}"
         dest: "/{{ nvidia_tmp_dir.path }}"
         remote_src: true
+    - name: Make installation script executable
+      ansible.builtin.file:
+        path: "{{ nvidia_tmp_dir.path }}/NVIDIA-Linux-x86_64-{{ nvidia_proprietary_version }}.run"
+        mode: "0755"
     - name: Run installation script
       ansible.builtin.command:
         cmd: "{{ nvidia_tmp_dir.path }}/NVIDIA-Linux-x86_64-{{ nvidia_proprietary_version }}.run -s"
