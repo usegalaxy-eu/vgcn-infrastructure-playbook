@@ -4,6 +4,7 @@
     cmd: nvidia-smi
   register: nvidia_smi
   failed_when: false
+  changed_when: false
 
 - name: Install NVIDIA driver if not correctly installed
   when: nvidia_smi.rc != 0
