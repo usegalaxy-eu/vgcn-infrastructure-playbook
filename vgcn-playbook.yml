@@ -153,6 +153,9 @@
           notify: Restart HTCondor
           loop: "{{ htcondor_token_files.files }}"
   roles:
+    - role: usegalaxy_eu.rocky_security_repository
+      become: true
+
     - usegalaxy_eu.firewall
     - usegalaxy_eu.restrict_docker_net
 
