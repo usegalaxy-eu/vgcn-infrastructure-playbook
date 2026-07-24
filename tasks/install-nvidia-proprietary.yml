@@ -20,9 +20,8 @@
       ansible.builtin.dnf:
         state: absent
         name:
-          - nvidia-driver-cuda-libs
-          - cuda-drivers
-          - kmod-nvidia-open-dkms
+          - '*nvidia*'
+          - '*cuda*'
         allowerasing: true
       when: ansible_distribution_major_version == '10'
 
