@@ -1,0 +1,28 @@
+---
+- name: Slurp /etc/docker/daemon.json
+  ansible.builtin.slurp:
+    src: /etc/docker/daemon.json
+  register: docker_daemon_json
+  failed_when: false
+
+- name: Install nvidia-container-toolkit and configure Docker runtime
+  when: >
+    docker_daemon_json.failed
+    or (docker_daemon_json.content | b64decode) is not search('"default-runtime": "nvidia"')
+    or (docker_daemon_json.content | b64decode) is not search('"path": "nvidia-container-runtime"')
+  block:
+    - name: Install nvidia-container-toolkit
+      ansible.builtin.dnf:
+        name: nvidia-container-toolkit
+        state: present
+
+    - name: Configure Docker runtime for NVIDIA
+      ansible.builtin.command:
+        cmd: nvidia-ctk runtime configure --runtime=docker
+      register: nvidia_ctk_runtime
+      changed_when: nvidia_ctk_runtime.rc == 0
+
+    - name: Restart Docker
+      ansible.builtin.systemd_service:
+        name: docker
+        state: restarted
