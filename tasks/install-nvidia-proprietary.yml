@@ -23,7 +23,9 @@
           - '*nvidia*'
           - '*cuda*'
         allowerasing: true
+        disable_excludes: all
       when: ansible_distribution_major_version == '10'
+      failed_when: false
 
     - name: Create temporary build directory
       ansible.builtin.tempfile:
@@ -72,3 +74,4 @@
       ansible.builtin.file:
         path: "{{ nvidia_tmp_dir.path }}"
         state: absent
+      when: nvidia_tmp_dir is defined
