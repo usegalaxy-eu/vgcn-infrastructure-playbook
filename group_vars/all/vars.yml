@@ -3,6 +3,9 @@
 firewall_public_services: []
 firewall_internal_services: []
 firewall_restart_daemon: true
+accepted_internal_networks:  # usegalaxy_eu.restrict_docker_net
+  - 10.4.68.201  # sn09 needed for GxIT Proxy
+  - 10.8.103.69  # LiteLLM gateway
 
 galaxy_training: false
 galaxy_group: training-pxe-test
