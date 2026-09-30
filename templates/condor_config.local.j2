@@ -47,3 +47,16 @@ JOB_START_COUNT = {{ htcondor_job_start_count }}
 JOB_START_DELAY = {{ htcondor_job_start_delay }}
 CLAIM_WORKLIFE = {{ htcondor_claim_worklife }}
 NEGOTIATOR_POST_JOB_RANK = {{ htcondor_negotiator_post_job_rank }}
+
+# Health Check
+STARTD_CRON_JOBLIST = $(STARTD_CRON_JOBLIST) nfscheck
+STARTD_CRON_NFSCHECK_EXECUTABLE = /usr/local/bin/check_nfs_condor.sh
+STARTD_CRON_NFSCHECK_PERIOD = 1m
+STARTD_CRON_NFSCHECK_MODE = Periodic
+STARTD_CRON_NFSCHECK_KILL = True
+
+STARTD_ATTRS = $(STARTD_ATTRS) NFS_AVAILABLE
+
+START = $(START) && (NFS_AVAILABLE =?= true || NFS_AVAILABLE == "true")
+WANT_VACATE = (NFS_Available =?= false)
+KILL = (NFS_Available =?= false)

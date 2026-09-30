@@ -57,6 +57,14 @@
         group: root
         mode: 0755
       notify: Restart Telegraf
+    - name: Deploy SLX disk monitor script
+      ansible.builtin.template:
+        src: check_nfs_condor.sh.j2
+        dest: "{{ check_nfs_condor_path }}"
+        owner: root
+        group: root
+        mode: 0755
+      notify: Restart Telegraf
     - name: Deploy NFS access monitor script
       ansible.builtin.template:
         src: nfs_check.sh.j2
