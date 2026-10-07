@@ -60,3 +60,12 @@ telegraf_plugins_extra:
     plugin: kernel_vmstat
     config:
       - fieldpass = ["oom_kill"]
+  ipmi_power:
+    plugin: exec
+    config:
+      - commands = ["sudo /usr/bin/ipmitool dcmi power reading"]
+      - timeout = "30s"
+      - interval = "1m"
+      - name_override = "ipmi_power"
+      - data_format = "grok"
+      - grok_patterns = ['%{SPACE}Average power reading over sample period:%{SPACE}%{NUMBER:watts:int} Watts']

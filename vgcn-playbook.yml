@@ -65,6 +65,22 @@
         group: root
         mode: 0755
       notify: Restart Telegraf
+    - name: Install ipmitool
+      ansible.builtin.dnf:
+        name: ipmitool
+        state: present
+    - name: Load the IPMI device interface
+      community.general.modprobe:
+        name: ipmi_devintf
+        state: present
+    - name: Allow Telegraf to read the power sensor
+      ansible.builtin.copy:
+        dest: /etc/sudoers.d/telegraf-ipmitool
+        content: "telegraf ALL=(root) NOPASSWD: /usr/bin/ipmitool dcmi power reading\n"
+        owner: root
+        group: root
+        mode: "0440"
+        validate: /usr/sbin/visudo -cf %s
     - name: "Copy telegraf extra plugins"
       template:
         src: "telegraf-extra-plugin.conf.j2"
