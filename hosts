@@ -6,7 +6,6 @@ c128m512g4-n37103.bi.privat # FAULTY NVME - NEEDS TO BE REPLACED
 [divgpu4]
 [entiregpu]
 # Nvidia L40S
-c128m512g4-n37103.bi.privat # FAULTY NVME - NEEDS TO BE REPLACED
 c128m512g4-n37104.bi.privat
 # Nvidia T4
 c64m384g8-n3801.bi.privat
