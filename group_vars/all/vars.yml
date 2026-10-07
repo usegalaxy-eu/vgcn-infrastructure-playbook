@@ -56,3 +56,7 @@ telegraf_plugins_extra:
       - unittype = "service"
       - timeout = "5s"
       - pattern = "autofs* condor* telegraf*"
+  oom_kills:
+    plugin: kernel_vmstat
+    config:
+      - fieldpass = ["oom_kill"]
