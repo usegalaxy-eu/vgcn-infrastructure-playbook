@@ -65,10 +65,6 @@
         group: root
         mode: 0755
       notify: Restart Telegraf
-    - name: Install ipmitool
-      ansible.builtin.dnf:
-        name: ipmitool
-        state: present
     - name: Load the IPMI device interface
       community.general.modprobe:
         name: ipmi_devintf
