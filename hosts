@@ -1,6 +1,6 @@
 # Nodes that should receive docker network restrictions should go here
 [test]
-#c128m512g4-n37103.bi.privat # FAULTY NVME - NEEDS TO BE REPLACED
+c128m512g4-n37103.bi.privat 
 # Nodes that should run internal Galaxy tools, like upload or expressions (short running)
 [internal]
 [divgpu4]
