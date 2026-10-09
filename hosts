@@ -1,11 +1,11 @@
 # Nodes that should receive docker network restrictions should go here
 [test]
-c128m512g4-n37103.bi.privat 
 # Nodes that should run internal Galaxy tools, like upload or expressions (short running)
 [internal]
 [divgpu4]
 [entiregpu]
 # Nvidia L40S
+c128m512g4-n37103.bi.privat 
 c128m512g4-n37104.bi.privat
 # Nvidia T4
 c64m384g8-n3801.bi.privat
