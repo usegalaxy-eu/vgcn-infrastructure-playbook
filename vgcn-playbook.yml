@@ -130,6 +130,29 @@
         owner: cvmfs
         group: cvmfs
         mode: "0755"
+    - name: Determine CA trust blocklist directory
+      ansible.builtin.stat:
+        path: /etc/pki/ca-trust/source/blocklist
+      register: ca_trust_blocklist_dir
+    - name: Set CA trust blocklist path
+      ansible.builtin.set_fact:
+        ca_trust_blocklist_path: "{{ '/etc/pki/ca-trust/source/blocklist' if ca_trust_blocklist_dir.stat.exists else '/etc/pki/ca-trust/source/blacklist' }}"
+    - name: Extract distrusted CA certificates into the blocklist
+      ansible.builtin.command: >
+        trust extract --overwrite --format=pem-bundle
+        --filter='pkcs11:object={{ item.object }};type=cert'
+        {{ ca_trust_blocklist_path }}/{{ item.file }}.pem
+      loop:
+        - object: Comodo%20AAA%20Services%20root
+          file: Comodo_AAA_Services_root
+        - object: emSign%20ECC%20Root%20CA%20-%20G3
+          file: emSign_ECC_Root_CA_-_G3
+      args:
+        creates: "{{ ca_trust_blocklist_path }}/{{ item.file }}.pem"
+      register: ca_trust_extract
+    - name: Update the system CA trust store
+      ansible.builtin.command: update-ca-trust
+      when: ca_trust_extract is changed
   post_tasks:
     - name: Template HTCondor local configuration.
       ansible.builtin.template:
