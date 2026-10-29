@@ -21,6 +21,21 @@
         name: condor
         state: restarted
   pre_tasks:
+    - name: Download shared HTCondor variables.
+      ansible.builtin.get_url:
+        url: "{{ htcondor_group_vars_url }}"
+        dest: /tmp/htcondor-group-vars.yml
+        mode: "0644"
+      delegate_to: localhost
+      become: false
+      run_once: true
+    - name: Load shared HTCondor variables.
+      ansible.builtin.include_vars:
+        file: /tmp/htcondor-group-vars.yml
+    - name: Apply VGCN-specific HTCondor overrides.
+      ansible.builtin.set_fact:
+        "{{ item.key }}": "{{ item.value }}"
+      loop: "{{ htcondor_vgcn_overrides | dict2items }}"
     - name: Install proprietary Nvidia driver
       ansible.builtin.include_tasks:
         file: tasks/install-nvidia-proprietary.yml
