@@ -21,17 +21,9 @@
         name: condor
         state: restarted
   pre_tasks:
-    - name: Download shared HTCondor variables.
-      ansible.builtin.get_url:
-        url: "{{ htcondor_group_vars_url }}"
-        dest: /tmp/htcondor-group-vars.yml
-        mode: "0644"
-      delegate_to: localhost
-      become: false
-      run_once: true
     - name: Load shared HTCondor variables.
       ansible.builtin.include_vars:
-        file: /tmp/htcondor-group-vars.yml
+        file: "{{ playbook_dir }}/infrastructure-playbook/group_vars/htcondor/vars.yml"
     - name: Apply VGCN-specific HTCondor overrides.
       ansible.builtin.set_fact:
         "{{ item.key }}": "{{ item.value }}"
@@ -146,17 +138,9 @@
         group: cvmfs
         mode: "0755"
   post_tasks:
-    - name: Download shared HTCondor local configuration template.
-      ansible.builtin.get_url:
-        url: "{{ htcondor_config_local_template_url }}"
-        dest: /tmp/condor_config.local.j2
-        mode: "0644"
-      delegate_to: localhost
-      become: false
-      run_once: true
     - name: Template HTCondor local configuration.
       ansible.builtin.template:
-        src: /tmp/condor_config.local.j2
+        src: infrastructure-playbook/templates/htcondor/condor_config.local.j2
         dest: /etc/condor/condor_config.local
         owner: root
         group: root

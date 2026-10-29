@@ -1,14 +1,10 @@
 ---
-# HTCondor configuration is shared with usegalaxy-eu/infrastructure-playbook and
-# downloaded from there at run time (see the pre_tasks in vgcn-playbook.yml):
-#   - templates/htcondor/condor_config.local.j2  -> /etc/condor/condor_config.local
-#   - group_vars/htcondor/vars.yml               -> loaded via include_vars
-# Only the VGCN-specific deltas are maintained in this file.
-htcondor_config_local_template_url: "https://raw.githubusercontent.com/usegalaxy-eu/infrastructure-playbook/master/templates/htcondor/condor_config.local.j2"
-htcondor_group_vars_url: "https://raw.githubusercontent.com/usegalaxy-eu/infrastructure-playbook/master/group_vars/htcondor/vars.yml"
-
-# VGCN-specific deltas applied on top of the upstream vars.
-# Applied via set_fact, which outranks include_vars, so these deterministically win.
+# HTCondor configuration is shared with usegalaxy-eu/infrastructure-playbook,
+# vendored as a git submodule and read directly from there:
+#   - infrastructure-playbook/group_vars/htcondor/vars.yml       (loaded in pre_tasks)
+#   - infrastructure-playbook/templates/htcondor/condor_config.local.j2  (post_tasks)
+# Only the VGCN-specific deltas are maintained in this file; they are applied
+# via set_fact, which outranks include_vars, so these deterministically win.
 htcondor_vgcn_overrides:
   # Every VGCN node is an execute node.
   htcondor_role_execute: true

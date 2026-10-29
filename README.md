@@ -8,3 +8,6 @@
 ## Requirements
 - Vault password
 - Mountpoints variables from https://github.com/usegalaxy-eu/mounts
+- Git submodules: `git submodule update --init --recursive`
+  (the HTCondor config template and variables are shared with
+  https://github.com/usegalaxy-eu/infrastructure-playbook and vendored as a submodule)
