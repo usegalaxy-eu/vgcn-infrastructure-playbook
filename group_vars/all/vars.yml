@@ -38,6 +38,7 @@ telegraf_agent_config_path: /etc/telegraf
 telegraf_historical_database: galaxy_stats
 telegraf_historical_measurements:
   - ipmi_power
+  - kernel_vmstat
 telegraf_plugins_extra:
   check_slx_disks_telegraf:
     plugin: exec
